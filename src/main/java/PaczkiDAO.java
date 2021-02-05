@@ -6,12 +6,12 @@ import tables.Paczki;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PackagesDAO {
+public class PaczkiDAO {
 
     private DBUtil dbUtil;
     private TextArea consoleTextArea;
 
-    public PackagesDAO(DBUtil dbUtil, TextArea consoleTextArea) {
+    public PaczkiDAO(DBUtil dbUtil, TextArea consoleTextArea) {
         this.dbUtil = dbUtil;
         this.consoleTextArea = consoleTextArea;
     }
@@ -103,7 +103,7 @@ public class PackagesDAO {
         }
 
     }
-
+// początek metod docelowych
     public ObservableList<Paczki> searchPackagesToDeliver() throws SQLException, ClassNotFoundException {
 
         String selectStmt = "call PaczkiDoOdebrania();";
@@ -119,7 +119,91 @@ public class PackagesDAO {
             return aPackages;
 
         } catch (SQLException e) {
-            consoleTextArea.appendText("While searching a racket from '" + "' name, an error occurred. \n");
+            consoleTextArea.appendText("While searching a package from '" + "' name, an error occurred. \n");
+            throw e;
+        }
+
+    }
+
+    public ObservableList<Paczki> klientHistoriaOdebranych() throws SQLException, ClassNotFoundException {
+
+        String selectStmt = "call klientHistoriaOdebranych();";
+
+        try {
+
+            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
+
+            ObservableList<Paczki> aPackages = getRacketList(resultSet);
+
+            consoleTextArea.appendText(selectStmt + "\n");
+
+            return aPackages;
+
+        } catch (SQLException e) {
+            consoleTextArea.appendText("While searching packages, an error occurred. \n");
+            throw e;
+        }
+
+    }
+
+    public ObservableList<Paczki> klientHistoriaNadanych() throws SQLException, ClassNotFoundException {
+
+        String selectStmt = "call klientHistoriaNadanych();";
+
+        try {
+
+            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
+
+            ObservableList<Paczki> aPackages = getRacketList(resultSet);
+
+            consoleTextArea.appendText(selectStmt + "\n");
+
+            return aPackages;
+
+        } catch (SQLException e) {
+            consoleTextArea.appendText("While searching packages, an error occurred. \n");
+            throw e;
+        }
+
+    }
+
+    public ObservableList<Paczki> stanPaczki() throws SQLException, ClassNotFoundException {
+
+        String selectStmt = "call stanPaczki();";
+
+        try {
+
+            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
+
+            ObservableList<Paczki> aPackages = getRacketList(resultSet);
+
+            consoleTextArea.appendText(selectStmt + "\n");
+
+            return aPackages;
+
+        } catch (SQLException e) {
+            consoleTextArea.appendText("While searching packages, an error occurred. \n");
+            throw e;
+        }
+
+    }
+
+    public ObservableList<Paczki> statystykiAutomatu() throws SQLException, ClassNotFoundException {
+
+        String selectStmt = "call statystykiAutomatu();";
+
+        try {
+
+            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
+
+            ObservableList<Paczki> aPackages = getRacketList(resultSet);
+
+            consoleTextArea.appendText(selectStmt + "\n");
+
+            return aPackages;
+
+        } catch (SQLException e) {
+            consoleTextArea.appendText("While searching packages, an error occurred. \n");
             throw e;
         }
 
