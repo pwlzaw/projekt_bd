@@ -14,7 +14,7 @@ public class PackagesApp extends Application {
     public void start(Stage stage) throws Exception {
         scene = new Scene(loadFXML("dbFX"), 800, 600);
         stage.setScene(scene);
-        stage.setTitle("Packages App");
+        stage.setTitle("tables.Packages App");
         stage.show();
     }
 

@@ -2,12 +2,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import tables.Paczki;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class RacketController {
+public class PackagesController {
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -49,25 +50,25 @@ public class RacketController {
     private TableView racketTable; // Value injected by FXMLLoader
 
     @FXML
-    private TableColumn<Racket, String> nameCol;
+    private TableColumn<Paczki, String> nameCol;
 
     @FXML
-    private TableColumn<Racket, String> manufacturerCol;
+    private TableColumn<Paczki, String> manufacturerCol;
 
     @FXML
-    private TableColumn<Racket, String> massCol;
+    private TableColumn<Paczki, String> massCol;
 
     @FXML
-    private TableColumn<Racket, String> headSizeCol;
+    private TableColumn<Paczki, String> headSizeCol;
 
     @FXML
-    private TableColumn<Racket, String> dominantColorCol;
+    private TableColumn<Paczki, String> dominantColorCol;
 
     @FXML
-    private TableColumn<Racket, String> priceUSDCol;
+    private TableColumn<Paczki, String> priceUSDCol;
 
     private DBUtil dbUtil;
-    private RacketDAO racketDAO;
+    private PackagesDAO packagesDAO;
 
 
     @FXML
@@ -77,7 +78,7 @@ public class RacketController {
 
             if (!racketNameToAddTextField.getText().equals(null)) {
 
-                racketDAO.insertRacket(racketNameToAddTextField.getText());
+                packagesDAO.insertRacket(racketNameToAddTextField.getText());
                 consoleTextArea.appendText("New Racket " + racketNameToAddTextField.getText() + " inserted." + "\n");
 
             }
@@ -92,7 +93,7 @@ public class RacketController {
     void connectButtonPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
 
         dbUtil = new DBUtil(userTextField.getText(), passwordTextField.getText(), consoleTextArea);
-        racketDAO = new RacketDAO(dbUtil, consoleTextArea);
+        packagesDAO = new PackagesDAO(dbUtil, consoleTextArea);
 
         dbUtil.dbConnect();
 
@@ -135,7 +136,7 @@ public class RacketController {
             if (!selectRacketNameTextField.getText().equals(null)) {
 
                 racketTable.getItems().clear();
-                ObservableList<Racket> wineData = racketDAO.searchRackets(selectRacketNameTextField.getText());
+                ObservableList<Paczki> wineData = packagesDAO.searchPackagesToDeliver();
                 populateRackets(wineData);
 //
             }
@@ -152,8 +153,8 @@ public class RacketController {
         try {
 
             racketTable.getItems().clear();
-            ObservableList<Racket> racketData = racketDAO.showAllRackets();
-            populateRackets(racketData);
+            ObservableList<Paczki> paczkiData = packagesDAO.showAllRackets();
+            populateRackets(paczkiData);
 
         } catch (SQLException e) {
             consoleTextArea.appendText("Error occurred while getting rackets from DB.\n");
@@ -162,8 +163,8 @@ public class RacketController {
 
     }
 
-    private void populateRackets(ObservableList<Racket> racketData) {
-        racketTable.setItems(racketData);
+    private void populateRackets(ObservableList<Paczki> paczkiData) {
+        racketTable.setItems(paczkiData);
     }
 
     @FXML
