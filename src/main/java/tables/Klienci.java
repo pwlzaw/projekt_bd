@@ -5,13 +5,13 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Clients {
+public class Klienci {
     private IntegerProperty id;
     private StringProperty imię_nazwisko;
     private StringProperty email;
     private IntegerProperty tel;
 
-    public Clients() {
+    public Klienci() {
         id = new SimpleIntegerProperty();
         imię_nazwisko= new SimpleStringProperty();
         email = new SimpleStringProperty();

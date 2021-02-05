@@ -6,12 +6,12 @@ import tables.Paczki;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PackagesDAO {
+public class PaczkiDAO {
 
     private DBUtil dbUtil;
     private TextArea consoleTextArea;
 
-    public PackagesDAO(DBUtil dbUtil, TextArea consoleTextArea) {
+    public PaczkiDAO(DBUtil dbUtil, TextArea consoleTextArea) {
         this.dbUtil = dbUtil;
         this.consoleTextArea = consoleTextArea;
     }

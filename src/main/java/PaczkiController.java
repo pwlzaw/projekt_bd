@@ -8,7 +8,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class PackagesController {
+public class PaczkiController {
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -68,7 +68,7 @@ public class PackagesController {
     private TableColumn<Paczki, String> priceUSDCol;
 
     private DBUtil dbUtil;
-    private PackagesDAO packagesDAO;
+    private PaczkiDAO paczkiDAO;
 
 
     @FXML
@@ -78,7 +78,7 @@ public class PackagesController {
 
             if (!racketNameToAddTextField.getText().equals(null)) {
 
-                packagesDAO.insertRacket(racketNameToAddTextField.getText());
+                paczkiDAO.insertRacket(racketNameToAddTextField.getText());
                 consoleTextArea.appendText("New Racket " + racketNameToAddTextField.getText() + " inserted." + "\n");
 
             }
@@ -93,7 +93,7 @@ public class PackagesController {
     void connectButtonPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
 
         dbUtil = new DBUtil(userTextField.getText(), passwordTextField.getText(), consoleTextArea);
-        packagesDAO = new PackagesDAO(dbUtil, consoleTextArea);
+        paczkiDAO = new PaczkiDAO(dbUtil, consoleTextArea);
 
         dbUtil.dbConnect();
 
@@ -136,7 +136,7 @@ public class PackagesController {
             if (!selectRacketNameTextField.getText().equals(null)) {
 
                 racketTable.getItems().clear();
-                ObservableList<Paczki> wineData = packagesDAO.searchPackagesToDeliver();
+                ObservableList<Paczki> wineData = paczkiDAO.searchPackagesToDeliver();
                 populateRackets(wineData);
 //
             }
@@ -153,7 +153,7 @@ public class PackagesController {
         try {
 
             racketTable.getItems().clear();
-            ObservableList<Paczki> paczkiData = packagesDAO.showAllRackets();
+            ObservableList<Paczki> paczkiData = paczkiDAO.showAllRackets();
             populateRackets(paczkiData);
 
         } catch (SQLException e) {

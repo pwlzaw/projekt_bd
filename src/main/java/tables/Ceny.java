@@ -5,11 +5,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Prices {
+public class Ceny {
     private IntegerProperty cena;
     private StringProperty rozmiar;
 
-    public Prices() {
+    public Ceny() {
         cena = new SimpleIntegerProperty();
         rozmiar = new SimpleStringProperty();
     }
