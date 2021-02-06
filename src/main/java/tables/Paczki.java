@@ -117,7 +117,7 @@ public class Paczki {
 
     private IntegerProperty id;
     private StringProperty stan;
-    private StringProperty rozmiar;
+    private IntegerProperty rozmiar;
     private IntegerProperty id_nadawcy;
     private IntegerProperty id_odbiorcy;
     private IntegerProperty skrytka_nadania_id;
@@ -130,7 +130,7 @@ public class Paczki {
     public Paczki() {
         id = new SimpleIntegerProperty();
         stan = new SimpleStringProperty();
-        rozmiar= new SimpleStringProperty();
+        rozmiar= new SimpleIntegerProperty();
         id_nadawcy=new SimpleIntegerProperty();
         id_odbiorcy=new SimpleIntegerProperty();
         skrytka_nadania_id=new SimpleIntegerProperty();
@@ -165,15 +165,15 @@ public class Paczki {
         this.stan.set(stan);
     }
 
-    public String getRozmiar() {
+    public int getRozmiar() {
         return rozmiar.get();
     }
 
-    public StringProperty rozmiarProperty() {
+    public IntegerProperty rozmiarProperty() {
         return rozmiar;
     }
 
-    public void setRozmiar(String rozmiar) {
+    public void setRozmiar(int rozmiar) {
         this.rozmiar.set(rozmiar);
     }
 

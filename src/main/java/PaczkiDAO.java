@@ -27,7 +27,7 @@ public class PaczkiDAO {
             Paczki r = new Paczki();
             r.setId(rs.getInt("id"));
             r.setStan(rs.getString("stan"));
-            r.setRozmiar(rs.getString("rozmiar"));
+            r.setRozmiar(rs.getInt("rozmiar"));
             r.setId_nadawcy(rs.getInt("id_nadawcy"));
             r.setId_odbiorcy(rs.getInt("id_odbiorcy"));
             r.setSkrytka_nadania_id(rs.getInt("skrytka_nadania_id"));
@@ -97,9 +97,9 @@ public class PaczkiDAO {
         sb.append(reciverMachineID);
         sb.append("),(");
         sb.append(senderMachineID);
-        sb.append("),('");
+        sb.append("),(");
         sb.append(size);
-        sb.append("'),('");
+        sb.append("),('");
         sb.append(LocalDate.now().toString());
         sb.append("'),('");
         sb.append("nadana");
