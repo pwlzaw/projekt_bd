@@ -1,3 +1,4 @@
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -55,5 +56,30 @@ public class ModeratorViewController {
 
     @FXML
     private TableColumn<?, ?> tableToBeDeliveredAdres;
+
+    @FXML
+    void buttonDayEarningsOnClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void buttonDeliverOnClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void buttonReciveOnClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void buttonStatsOnClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void buttonToBeDeliveredOnClick(ActionEvent event) {
+
+    }
 
 }

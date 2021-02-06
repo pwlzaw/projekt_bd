@@ -89,8 +89,9 @@ public class UserViewController {
 
     private DBUtil dbUtil;
     private PaczkiDAO paczkiDAO;
+    String IDKlienta;
 
-    private void populateRackets(ObservableList<Paczki> paczkiData) {
+    private void populatePackages(ObservableList<Paczki> paczkiData) {
         tableState.setItems(paczkiData);
     }
 
@@ -99,11 +100,12 @@ public class UserViewController {
         try {
 
             tableState.getItems().clear();
-            ObservableList<Paczki> wineData = paczkiDAO.klientHistoriaOdebranych();
-            populateRackets(wineData);
+            ObservableList<Paczki> wineData = paczkiDAO.klientHistoriaOdebranych(IDKlienta); // do zmiany id
+            populatePackages(wineData);
 
 
         } catch (SQLException e) {
+            textOutput.setText("Error occurred while getting wines from DB.\n");
             throw e;
         }
     }
@@ -113,11 +115,12 @@ public class UserViewController {
         try {
 
             tableState.getItems().clear();
-            ObservableList<Paczki> wineData = paczkiDAO.klientHistoriaNadanych();
-            populateRackets(wineData);
+            ObservableList<Paczki> wineData = paczkiDAO.klientHistoriaNadanych(IDKlienta); // do zmiany id
+            populatePackages(wineData);
 
 
         } catch (SQLException e) {
+            textOutput.setText("Error occurred while getting wines from DB.\n");
             throw e;
         }
     }
@@ -129,11 +132,12 @@ public class UserViewController {
         try {
 
                 tableState.getItems().clear();
-                ObservableList<Paczki> wineData = paczkiDAO.stanPaczki();
-                populateRackets(wineData);
+                ObservableList<Paczki> wineData = paczkiDAO.stanPaczek(IDKlienta); // do zmiany id
+                populatePackages(wineData);
 
 
         } catch (SQLException e) {
+            textOutput.setText("Error occurred while getting wines from DB.\n");
             throw e;
         }
     }
@@ -142,12 +146,15 @@ public class UserViewController {
     void buttonSendPackageOnClick(ActionEvent event) throws SQLException, ClassNotFoundException{
         try {
 
-            if (!txtReciverName.getText().equals(null) && !txtReciverMachineID.getText().equals(null) && !txtSize.getText().equals(null)) {
+            if (!txtReciverName.getText().equals(null) && !txtReciverMachineID.getText().equals(null) && !txtSize.getText().equals(null) && !txtSenderMachineID.getText().equals(null)
+            && !txtSenderName.getText().equals(null) && !txtReciverNuber.getText().equals(null) && !txtReciverMail.getText().equals(null) && !txtSenderMail.getText().equals(null)
+            && !txtSenderNumber.getText().equals(null)) {
 
-                paczkiDAO.sendPackage(txtReciverName.getText(),txtReciverMachineID.getText(),txtSize.getText());
-
+                paczkiDAO.sendPackage(txtReciverName.getText(),txtReciverNuber.getText(),txtReciverMail.getText(),txtSenderName.getText(),txtSenderNumber.getText(),txtSenderMail.getText(),txtReciverMachineID.getText(),txtSenderMachineID.getText(),txtSize.getText());
+                textOutput.setText("Package sent.\n");
             }
         } catch (SQLException e) {
+            textOutput.setText("Error occurred while getting wines from DB.\n");
             throw e;
         }
     }

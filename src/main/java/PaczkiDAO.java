@@ -87,16 +87,22 @@ public class PaczkiDAO {
 
     }
     // początek metod docelowych
-    public void sendPackage(String reciver,String machineID,String size) throws SQLException, ClassNotFoundException {
+    public void sendPackage(String reciverName,String reciverPhone, String reciverEmail,String senderName, String senderPhone, String senderEmail, String reciverMachineID, String senderMachineID,String size) throws SQLException, ClassNotFoundException {
 
-        StringBuilder sb = new StringBuilder("INSERT INTO packages(id_odbiorcy,skrytka_odbioru_id,rozmiar,data_nadania) VALUES(");
-        sb.append(reciver);
+        StringBuilder sb = new StringBuilder("INSERT INTO packages(id_odbiorcy,id_nadawcy,skrytka_nadania_id,skrytka_odbioru_id,rozmiar,data_nadania,stan) VALUES(");
+        sb.append(reciverName);
         sb.append("),(");
-        sb.append(machineID);
+        sb.append(senderName);
+        sb.append("),(");
+        sb.append(reciverMachineID);
+        sb.append("),(");
+        sb.append(senderMachineID);
         sb.append("),('");
         sb.append(size);
         sb.append("'),('");
         sb.append(LocalDate.now().toString());
+        sb.append("'),('");
+        sb.append("nadana");
         sb.append("');");
         String insertStmt = sb.toString();
 
@@ -116,6 +122,7 @@ public class PaczkiDAO {
 
         String selectStmt = "call PaczkiDoOdebrania();";
 
+
         try {
 
             ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
@@ -133,30 +140,11 @@ public class PaczkiDAO {
 
     }
 
-    public ObservableList<Paczki> klientHistoriaOdebranych() throws SQLException, ClassNotFoundException {
+    public ObservableList<Paczki> klientHistoriaOdebranych(String id) throws SQLException, ClassNotFoundException {
 
-        String selectStmt = "call klientHistoriaOdebranych();";
-
-        try {
-
-            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
-
-            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
-
-            consoleTextArea.appendText(selectStmt + "\n");
-
-            return aPackages;
-
-        } catch (SQLException e) {
-            consoleTextArea.appendText("While searching packages, an error occurred. \n");
-            throw e;
-        }
-
-    }
-
-    public ObservableList<Paczki> klientHistoriaNadanych() throws SQLException, ClassNotFoundException {
-
-        String selectStmt = "call klientHistoriaNadanych();";
+        String selectStmt = "call klientHistoriaOdebranych(";
+        selectStmt+=id;
+        selectStmt+=");";
 
         try {
 
@@ -175,9 +163,11 @@ public class PaczkiDAO {
 
     }
 
-    public ObservableList<Paczki> stanPaczki() throws SQLException, ClassNotFoundException {
+    public ObservableList<Paczki> klientHistoriaNadanych(String id) throws SQLException, ClassNotFoundException {
 
-        String selectStmt = "call stanPaczki();";
+        String selectStmt = "call klientHistoriaNadanych(";
+        selectStmt+=id;
+        selectStmt+=");";
 
         try {
 
@@ -196,9 +186,36 @@ public class PaczkiDAO {
 
     }
 
-    public ObservableList<Paczki> statystykiAutomatu() throws SQLException, ClassNotFoundException {
+    public ObservableList<Paczki> stanPaczek(String id_klienta) throws SQLException, ClassNotFoundException {
 
-        String selectStmt = "call statystykiAutomatu();";
+        String selectStmt = "call stanPaczeK(";
+        selectStmt+=id_klienta;
+        selectStmt+=");";
+
+        try {
+
+            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
+
+            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
+
+            consoleTextArea.appendText(selectStmt + "\n");
+
+            return aPackages;
+
+        } catch (SQLException e) {
+            consoleTextArea.appendText("While searching packages, an error occurred. \n");
+            throw e;
+        }
+
+    }
+
+    public ObservableList<Paczki> statystykiAutomatu(String id_automatu, String dzien) throws SQLException, ClassNotFoundException {
+
+        String selectStmt = "call statystykiAutomatu(";
+        selectStmt+=id_automatu;
+        selectStmt+=",'";
+        selectStmt+=dzien;
+        selectStmt+="');";
 
         try {
 
