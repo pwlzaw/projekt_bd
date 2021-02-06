@@ -5,11 +5,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import tables.Paczki;
 
 import java.sql.SQLException;
 
 public class UserViewController {
+
+
 
     @FXML
     private Button buttonHistorySent;
@@ -18,7 +21,7 @@ public class UserViewController {
     private Button buttonState;
 
     @FXML
-    private TableView tableState;
+    private TableView<Paczki> tableState;
 
     @FXML
     private TableColumn<?, ?> tableStateColumnId;
@@ -51,10 +54,13 @@ public class UserViewController {
     private Button buttonHistoryCollected;
 
     @FXML
-    private TextField txtReciver;
+    private Text textOutput;
 
     @FXML
-    private TextField txtMachineID;
+    private TextField txtReciverName;
+
+    @FXML
+    private TextField txtReciverMachineID;
 
     @FXML
     private TextField txtSize;
@@ -63,7 +69,23 @@ public class UserViewController {
     private Button buttonSendPackage;
 
     @FXML
-    private Button buttonHistory1;
+    private TextField txtSenderMachineID;
+
+    @FXML
+    private TextField txtSenderName;
+
+    @FXML
+    private TextField txtReciverNuber;
+
+    @FXML
+    private TextField txtReciverMail;
+
+    @FXML
+    private TextField txtSenderMail;
+
+    @FXML
+    private TextField txtSenderNumber;
+
 
     private DBUtil dbUtil;
     private PaczkiDAO paczkiDAO;
@@ -120,9 +142,9 @@ public class UserViewController {
     void buttonSendPackageOnClick(ActionEvent event) throws SQLException, ClassNotFoundException{
         try {
 
-            if (!txtReciver.getText().equals(null) && !txtMachineID.getText().equals(null) && !txtSize.getText().equals(null)) {
+            if (!txtReciverName.getText().equals(null) && !txtReciverMachineID.getText().equals(null) && !txtSize.getText().equals(null)) {
 
-                paczkiDAO.sendPackage(txtReciver.getText(),txtMachineID.getText(),txtSize.getText());
+                paczkiDAO.sendPackage(txtReciverName.getText(),txtReciverMachineID.getText(),txtSize.getText());
 
             }
         } catch (SQLException e) {
