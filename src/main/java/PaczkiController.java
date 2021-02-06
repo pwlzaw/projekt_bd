@@ -71,9 +71,9 @@ public class PaczkiController {
     private PaczkiDAO paczkiDAO;
 
 
-//    @FXML
-//    void addRacketButtonPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
-//
+    @FXML
+    void addRacketButtonPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
+
 //        try {
 //
 //            if (!racketNameToAddTextField.getText().equals(null)) {
@@ -86,8 +86,8 @@ public class PaczkiController {
 //            consoleTextArea.appendText("Error occurred while inserting racket.\n");
 //            throw e;
 //        }
-//
-//    }
+
+    }
 
     @FXML
     void connectButtonPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
