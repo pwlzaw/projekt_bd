@@ -42,7 +42,7 @@ public class PaczkiDAO {
         return paczkiList;
     }
 
-
+// niepotrzebne
     public ObservableList<Paczki> searchPackages(String manuf) throws SQLException, ClassNotFoundException {
 
         String selectStmt = "SELECT * FROM paczki WHERE rozmiar LIKE '%" + manuf + "%';";
