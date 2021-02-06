@@ -8,13 +8,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<SplitPane dividerPositions="0.16335227272727273" nodeOrientation="LEFT_TO_RIGHT" prefHeight="427.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserViewController">
+<SplitPane dividerPositions="0.16335227272727273, 0.5" nodeOrientation="LEFT_TO_RIGHT" prefHeight="427.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserViewController">
    <items>
       <AnchorPane prefHeight="425.0" prefWidth="600.0">
          <children>
-            <Button fx:id="buttonHistory" layoutX="96.0" layoutY="26.0" mnemonicParsing="false" text="Historia Paczek" />
-            <Button fx:id="buttonState" layoutX="286.0" layoutY="26.0" mnemonicParsing="false" text="Stan Paczek" />
+            <Button fx:id="buttonHistorySent" layoutX="166.0" layoutY="26.0" mnemonicParsing="false" onAction="#buttonHistorySentOnClick" text="Historia Odebranych" />
+            <Button fx:id="buttonState" layoutX="323.0" layoutY="26.0" mnemonicParsing="false" onAction="#buttonStateOnClick" text="Stan Paczek" />
             <TableView fx:id="tableState" layoutY="99.0" prefHeight="284.0" prefWidth="430.0">
               <columns>
                 <TableColumn fx:id="tableStateColumnId" prefWidth="75.0" text="ID paczki" />
@@ -32,18 +31,20 @@
                   <TableColumn fx:id="tableHistoryColumnReciveDate" prefWidth="104.0" text="Data Odbioru" />
                </columns>
             </TableView>
+            <Button fx:id="buttonHistoryCollected" layoutX="22.0" layoutY="26.0" mnemonicParsing="false" onAction="#buttonHistoryCollectedOnClick" text="Historia Nadanych" />
          </children>
       </AnchorPane>
       <AnchorPane maxWidth="300.0" prefHeight="425.0" prefWidth="300.0" SplitPane.resizableWithParent="false">
          <children>
             <TextField fx:id="txtReciver" layoutX="104.0" layoutY="25.0" />
             <TextField fx:id="txtMachineID" layoutX="104.0" layoutY="60.0" />
-            <TextField layoutX="104.0" layoutY="94.0" />
+            <TextField fx:id="txtSize" layoutX="104.0" layoutY="94.0" />
             <Text layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Odbiorca" />
             <Text layoutX="14.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rozmiar" />
             <Text layoutX="14.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID Paczkomatu" />
-            <Button fx:id="buttonSendPackage" layoutX="135.0" layoutY="141.0" mnemonicParsing="false" text="Wyślij Paczkę" />
+            <Button fx:id="buttonSendPackage" layoutX="135.0" layoutY="141.0" mnemonicParsing="false" onAction="#buttonSendPackageOnClick" text="Wyślij Paczkę" />
          </children>
       </AnchorPane>
+      <Button fx:id="buttonHistory1" mnemonicParsing="false" onAction="#buttonHistoryOnClick" text="Historia Paczek" />
    </items>
 </SplitPane>

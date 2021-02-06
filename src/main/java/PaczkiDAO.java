@@ -5,6 +5,8 @@ import tables.Paczki;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class PaczkiDAO {
 
@@ -16,7 +18,7 @@ public class PaczkiDAO {
         this.consoleTextArea = consoleTextArea;
     }
 
-    private ObservableList<Paczki> getRacketList(ResultSet rs) throws SQLException {
+    private ObservableList<Paczki> getPackagesList(ResultSet rs) throws SQLException {
 
         ObservableList<Paczki> paczkiList = FXCollections.observableArrayList();
 
@@ -49,7 +51,7 @@ public class PaczkiDAO {
 
             ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
 
-            ObservableList<Paczki> aPackages = getRacketList(resultSet);
+            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
 
             consoleTextArea.appendText(selectStmt + "\n");
 
@@ -72,7 +74,7 @@ public class PaczkiDAO {
 
             ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
 
-            ObservableList<Paczki> paczkiList = getRacketList(resultSet);
+            ObservableList<Paczki> paczkiList = getPackagesList(resultSet);
             consoleTextArea.appendText(selectStmt);
 
             return paczkiList;
@@ -84,11 +86,17 @@ public class PaczkiDAO {
         }
 
     }
+    // początek metod docelowych
+    public void sendPackage(String reciver,String machineID,String size) throws SQLException, ClassNotFoundException {
 
-    public void insertRacket(String name) throws SQLException, ClassNotFoundException {
-
-        StringBuilder sb = new StringBuilder("INSERT INTO rackets(model) VALUES('");
-        sb.append(name);
+        StringBuilder sb = new StringBuilder("INSERT INTO packages(id_odbiorcy,skrytka_odbioru_id,rozmiar,data_nadania) VALUES(");
+        sb.append(reciver);
+        sb.append("),(");
+        sb.append(machineID);
+        sb.append("),('");
+        sb.append(size);
+        sb.append("'),('");
+        sb.append(LocalDate.now().toString());
         sb.append("');");
         String insertStmt = sb.toString();
 
@@ -103,7 +111,7 @@ public class PaczkiDAO {
         }
 
     }
-// początek metod docelowych
+
     public ObservableList<Paczki> searchPackagesToDeliver() throws SQLException, ClassNotFoundException {
 
         String selectStmt = "call PaczkiDoOdebrania();";
@@ -112,7 +120,7 @@ public class PaczkiDAO {
 
             ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
 
-            ObservableList<Paczki> aPackages = getRacketList(resultSet);
+            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
 
             consoleTextArea.appendText(selectStmt + "\n");
 
@@ -133,7 +141,7 @@ public class PaczkiDAO {
 
             ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
 
-            ObservableList<Paczki> aPackages = getRacketList(resultSet);
+            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
 
             consoleTextArea.appendText(selectStmt + "\n");
 
@@ -154,7 +162,7 @@ public class PaczkiDAO {
 
             ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
 
-            ObservableList<Paczki> aPackages = getRacketList(resultSet);
+            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
 
             consoleTextArea.appendText(selectStmt + "\n");
 
@@ -175,7 +183,7 @@ public class PaczkiDAO {
 
             ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
 
-            ObservableList<Paczki> aPackages = getRacketList(resultSet);
+            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
 
             consoleTextArea.appendText(selectStmt + "\n");
 
@@ -196,7 +204,7 @@ public class PaczkiDAO {
 
             ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
 
-            ObservableList<Paczki> aPackages = getRacketList(resultSet);
+            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
 
             consoleTextArea.appendText(selectStmt + "\n");
 

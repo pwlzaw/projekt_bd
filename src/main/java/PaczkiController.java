@@ -71,23 +71,23 @@ public class PaczkiController {
     private PaczkiDAO paczkiDAO;
 
 
-    @FXML
-    void addRacketButtonPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
-
-        try {
-
-            if (!racketNameToAddTextField.getText().equals(null)) {
-
-                paczkiDAO.insertRacket(racketNameToAddTextField.getText());
-                consoleTextArea.appendText("New Racket " + racketNameToAddTextField.getText() + " inserted." + "\n");
-
-            }
-        } catch (SQLException e) {
-            consoleTextArea.appendText("Error occurred while inserting racket.\n");
-            throw e;
-        }
-
-    }
+//    @FXML
+//    void addRacketButtonPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
+//
+//        try {
+//
+//            if (!racketNameToAddTextField.getText().equals(null)) {
+//
+//                paczkiDAO.sendPackage(racketNameToAddTextField.getText());
+//                consoleTextArea.appendText("New Racket " + racketNameToAddTextField.getText() + " inserted." + "\n");
+//
+//            }
+//        } catch (SQLException e) {
+//            consoleTextArea.appendText("Error occurred while inserting racket.\n");
+//            throw e;
+//        }
+//
+//    }
 
     @FXML
     void connectButtonPressed(ActionEvent event) throws SQLException, ClassNotFoundException {
