@@ -86,6 +86,12 @@ public class UserViewController {
     @FXML
     private TextField txtSenderNumber;
 
+    @FXML
+    private TextField txtRecivePackage;
+
+    @FXML
+    private Button buttonRecivePackage;
+
 
     private DBUtil dbUtil;
     private PaczkiDAO paczkiDAO;
@@ -153,6 +159,20 @@ public class UserViewController {
                 paczkiDAO.sendPackage(txtReciverName.getText(),txtReciverNuber.getText(),txtReciverMail.getText(),txtSenderName.getText(),txtSenderNumber.getText(),txtSenderMail.getText(),txtReciverMachineID.getText(),txtSenderMachineID.getText(),txtSize.getText());
                 textOutput.setText("Package sent.\n");
             }
+        } catch (SQLException e) {
+            textOutput.setText("Error occurred while getting wines from DB.\n");
+            throw e;
+        }
+    }
+
+    @FXML
+    void buttonRecivePackageOnClick(ActionEvent event) throws SQLException, ClassNotFoundException{
+        try {
+
+            paczkiDAO.odbierzPaczkeKlient(txtRecivePackage.getText());
+            textOutput.setText("Package received.\n");
+
+
         } catch (SQLException e) {
             textOutput.setText("Error occurred while getting wines from DB.\n");
             throw e;

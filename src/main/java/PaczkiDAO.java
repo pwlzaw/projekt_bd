@@ -90,7 +90,7 @@ public class PaczkiDAO {
     public void sendPackage(String reciverName,String reciverPhone, String reciverEmail,String senderName, String senderPhone, String senderEmail, String reciverMachineID, String senderMachineID,String size) throws SQLException, ClassNotFoundException {
 
         StringBuilder sb = new StringBuilder("INSERT INTO packages(id_odbiorcy,id_nadawcy,skrytka_nadania_id,skrytka_odbioru_id,rozmiar,data_nadania,stan) VALUES(");
-        sb.append(reciverName);
+        sb.append(reciverName); // zmienić imiona na id
         sb.append("),(");
         sb.append(senderName);
         sb.append("),(");
@@ -134,7 +134,7 @@ public class PaczkiDAO {
             return aPackages;
 
         } catch (SQLException e) {
-            consoleTextArea.appendText("While searching a package from '" + "' name, an error occurred. \n");
+            consoleTextArea.appendText("While searching packages, an error occurred. \n");
             throw e;
         }
 
@@ -226,6 +226,83 @@ public class PaczkiDAO {
             consoleTextArea.appendText(selectStmt + "\n");
 
             return aPackages;
+
+        } catch (SQLException e) {
+            consoleTextArea.appendText("While searching packages, an error occurred. \n");
+            throw e;
+        }
+
+    }
+
+    public ObservableList<Paczki> statystykiDnia(String dzien) throws SQLException, ClassNotFoundException {
+
+        String selectStmt = "call PodgladZysku('";
+        selectStmt+=dzien;
+        selectStmt+="');";
+
+        try {
+
+            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
+
+            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
+
+            consoleTextArea.appendText(selectStmt + "\n");
+
+            return aPackages;
+
+        } catch (SQLException e) {
+            consoleTextArea.appendText("While searching packages, an error occurred. \n");
+            throw e;
+        }
+
+    }
+
+    public void dostarczPaczke(String id) throws SQLException, ClassNotFoundException {
+
+        String insertStmt = "call dostarcz_przesylke('";
+        insertStmt+=id;
+        insertStmt+="');";
+
+        try {
+
+            dbUtil.dbExecuteUpdate(insertStmt);
+            consoleTextArea.appendText(insertStmt + "\n");
+
+        } catch (SQLException e) {
+            consoleTextArea.appendText("While searching packages, an error occurred. \n");
+            throw e;
+        }
+
+    }
+
+    public void odbierzPaczke(String id) throws SQLException, ClassNotFoundException {
+
+        String insertStmt = "call odbierz_przesylke('";
+        insertStmt+=id;
+        insertStmt+="');";
+
+        try {
+
+            dbUtil.dbExecuteUpdate(insertStmt);
+            consoleTextArea.appendText(insertStmt + "\n");
+
+        } catch (SQLException e) {
+            consoleTextArea.appendText("While searching packages, an error occurred. \n");
+            throw e;
+        }
+
+    }
+
+    public void odbierzPaczkeKlient(String id) throws SQLException, ClassNotFoundException {
+
+        String insertStmt = "call klient_odbierz_przesylke('";
+        insertStmt+=id;
+        insertStmt+="');";
+
+        try {
+
+            dbUtil.dbExecuteUpdate(insertStmt);
+            consoleTextArea.appendText(insertStmt + "\n");
 
         } catch (SQLException e) {
             consoleTextArea.appendText("While searching packages, an error occurred. \n");

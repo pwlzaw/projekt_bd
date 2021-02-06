@@ -20,7 +20,7 @@
       <TextField fx:id="textPackageId" layoutX="445.0" layoutY="154.0" />
       <Text layoutX="445.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID przesyłki" />
       <Text layoutX="184.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dzień" />
-      <Button fx:id="buttonDayEarnings" layoutX="184.0" layoutY="73.0" mnemonicParsing="false" onAction="#buttonDayEarningsOnClick" text="Statystyki Dla Dnia" />
+      <Button fx:id="buttonDayEarnings" layoutX="184.0" layoutY="73.0" mnemonicParsing="false" onAction="#buttonDayEarningsOnClick" text="Zyski Dla Dnia" />
       <Text fx:id="textOutput" layoutX="14.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <TableView fx:id="tableStats" layoutX="14.0" layoutY="135.0" prefHeight="200.0" prefWidth="401.0">
         <columns>
