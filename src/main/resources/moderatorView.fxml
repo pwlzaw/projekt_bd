@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ModeratorViewController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ModeratorViewController">
+   <children>
+      <Button fx:id="buttonStats" layoutX="14.0" layoutY="73.0" mnemonicParsing="false" text="Statystyki Automatu" />
+      <Button fx:id="buttonToBeDelivered" layoutX="475.0" layoutY="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="Do Dostarczenia" />
+      <DatePicker fx:id="datePicker" layoutX="184.0" layoutY="40.0" />
+      <TextField fx:id="textAutomatId" layoutX="14.0" layoutY="40.0" />
+      <Text layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID automatu" />
+      <Button fx:id="buttonRecive" layoutX="445.0" layoutY="188.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Odbierz Przesyłkę" />
+      <Button fx:id="buttonDeliver" layoutX="445.0" layoutY="222.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Dostarcz Przesyłkę" />
+      <TextField fx:id="textPackageId" layoutX="445.0" layoutY="154.0" />
+      <Text layoutX="445.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID przesyłki" />
+      <Text layoutX="184.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dzień" />
+      <Button fx:id="buttonDayEarnings" layoutX="184.0" layoutY="73.0" mnemonicParsing="false" text="Statystyki Dla Dnia" />
+      <Text fx:id="textOutput" layoutX="14.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <TableView fx:id="tableStats" layoutX="14.0" layoutY="135.0" prefHeight="200.0" prefWidth="401.0">
+        <columns>
+          <TableColumn fx:id="tableStatsId" prefWidth="85.0" text="ID automatu" />
+          <TableColumn fx:id="tableStatsAdres" prefWidth="65.0" text="Adres" />
+            <TableColumn fx:id="tableStatsDeliveredNumber" prefWidth="119.0" text="Licznba Nadanych" />
+            <TableColumn prefWidth="131.0" text="Liczba Odebranych" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tableToBeDelivered" layoutX="14.0" layoutY="135.0" prefHeight="200.0" prefWidth="401.0">
+         <columns>
+            <TableColumn fx:id="tableToBeDeliveredId" prefWidth="85.0" text="ID Paczki" />
+            <TableColumn fx:id="tableToBeDeliveredAdres" prefWidth="65.0" text="Adres" />
+         </columns>
+      </TableView>
+   </children>
 </AnchorPane>
