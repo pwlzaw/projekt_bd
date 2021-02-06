@@ -89,21 +89,25 @@ public class PaczkiDAO {
     // początek metod docelowych
     public void sendPackage(String reciverName,String reciverPhone, String reciverEmail,String senderName, String senderPhone, String senderEmail, String reciverMachineID, String senderMachineID,String size) throws SQLException, ClassNotFoundException {
 
-        StringBuilder sb = new StringBuilder("INSERT INTO packages(id_odbiorcy,id_nadawcy,skrytka_nadania_id,skrytka_odbioru_id,rozmiar,data_nadania,stan) VALUES(");
-        sb.append(reciverName); // zmienić imiona na id
-        sb.append("),(");
+        StringBuilder sb = new StringBuilder("call nadaj_przesylke('");
+        sb.append(reciverName);
+        sb.append("',");
+        sb.append(reciverPhone);
+        sb.append(",'");
+        sb.append(reciverEmail);
+        sb.append("','");
         sb.append(senderName);
-        sb.append("),(");
+        sb.append("',");
+        sb.append(senderPhone);
+        sb.append(",'");
+        sb.append(senderEmail);
+        sb.append("',");
         sb.append(reciverMachineID);
-        sb.append("),(");
+        sb.append(",");
         sb.append(senderMachineID);
-        sb.append("),(");
+        sb.append(",");
         sb.append(size);
-        sb.append("),('");
-        sb.append(LocalDate.now().toString());
-        sb.append("'),('");
-        sb.append("nadana");
-        sb.append("');");
+        sb.append(");");
         String insertStmt = sb.toString();
 
         try {
