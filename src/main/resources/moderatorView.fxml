@@ -30,7 +30,7 @@
             <TableColumn prefWidth="131.0" text="Liczba Odebranych" />
         </columns>
       </TableView>
-      <TableView fx:id="tableToBeDelivered" layoutX="14.0" layoutY="135.0" prefHeight="200.0" prefWidth="401.0">
+      <TableView fx:id="tableToBeDelivered" layoutX="14.0" layoutY="122.0" prefHeight="200.0" prefWidth="401.0">
          <columns>
             <TableColumn fx:id="tableToBeDeliveredId" prefWidth="85.0" text="ID Paczki" />
             <TableColumn fx:id="tableToBeRecivedAdres" prefWidth="100.0" text="Adres Nadania" />

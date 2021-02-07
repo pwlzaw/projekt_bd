@@ -94,7 +94,7 @@ public class DBUtil {
             if (stmt != null) {
                 stmt.close();
             }
-            dbDisconnect();
+            //dbDisconnect();
         }
 
         return crs;
@@ -115,7 +115,7 @@ public class DBUtil {
             if (stmt != null) {
                 stmt.close();
             }
-            dbDisconnect();
+            //dbDisconnect();
         }
     }
 

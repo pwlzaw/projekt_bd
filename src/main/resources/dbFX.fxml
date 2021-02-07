@@ -16,9 +16,9 @@
                 <VBox layoutX="1.0" layoutY="9.0" prefHeight="391.0" prefWidth="167.0" spacing="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <children>
                         <Label text="Użytkownik:" />
-                        <TextField fx:id="userTextField" promptText="Podaj nazwę" />
+                        <TextField fx:id="userTextField" maxWidth="-Infinity" prefWidth="120.0" promptText="Podaj nazwę" />
                         <Label text="Hasło:" />
-                        <PasswordField fx:id="passwordTextField" prefWidth="207.0" promptText="Podaj hasło" />
+                        <PasswordField fx:id="passwordTextField" maxWidth="-Infinity" prefHeight="1.0" prefWidth="120.0" promptText="Podaj hasło" />
                         <Button fx:id="connectClientButton" mnemonicParsing="false" onAction="#connectClientButtonPressed" text="Zaloguj jako klient" />
                   <Button fx:id="connectWorkerButton" mnemonicParsing="false" onAction="#connectWorkerButtonPressed" text="Zaloguj jako pracownik" />
                         <TextArea fx:id="consoleTextArea" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
