@@ -10,12 +10,26 @@ public class Klienci {
     private StringProperty imię_nazwisko;
     private StringProperty email;
     private IntegerProperty tel;
+    private StringProperty username;
 
     public Klienci() {
         id = new SimpleIntegerProperty();
         imię_nazwisko= new SimpleStringProperty();
         email = new SimpleStringProperty();
         tel = new SimpleIntegerProperty();
+        username = new SimpleStringProperty();
+    }
+
+    public String getUsername() {
+        return username.get();
+    }
+
+    public StringProperty usernameProperty() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username.set(username);
     }
 
     public int getId() {

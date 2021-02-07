@@ -82,21 +82,18 @@ public class UserViewController {
     @FXML
     private Button buttonRecivePackage;
 
-    // wczytywanie id aktualnego użytkownika - nie działa
-    String selectStmt = "select id from klienci where CONCAT(username,'@localhost') = current_user();";
-    ResultSet resultSet;
+    // wczytywanie id aktualnego użytkownika - już działa
+    String IDKlienta;
 
     {
         try {
-            resultSet = PaczkiController.dbUtil.dbExecuteQuery(selectStmt);
+            IDKlienta = PaczkiController.paczkiDAO.searchUsersID();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
-
-    String IDKlienta =resultSet.toString();
 
 
     private void populatePackages(ObservableList<StanPaczek> paczkiData) {
@@ -105,6 +102,7 @@ public class UserViewController {
 
     @FXML
     void buttonHistoryCollectedOnClick(ActionEvent event) throws SQLException, ClassNotFoundException{
+
         try {
 
             tableState.getItems().clear();

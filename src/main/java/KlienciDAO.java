@@ -27,6 +27,7 @@ public class KlienciDAO {
             k.setImię_nazwisko(rs.getString("imię_nazwisko"));
             k.setEmail(rs.getString("email"));
             k.setTel(rs.getInt("tel"));
+            k.setUsername(rs.getString("username"));
             KlienciList.add(k);
         }
 

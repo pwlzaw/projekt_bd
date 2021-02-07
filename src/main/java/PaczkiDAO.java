@@ -78,6 +78,18 @@ public class PaczkiDAO {
 
         return paczkiList;
     }
+// test
+    private int getUsersID(ResultSet rs) throws SQLException {
+
+        int id=0;
+
+
+        while (rs.next()) {
+            id=(rs.getInt("id"));
+        }
+
+        return id;
+    }
 
 //// stare metody
 //    public ObservableList<Paczki> searchPackages(String manuf) throws SQLException, ClassNotFoundException {
@@ -158,6 +170,27 @@ public class PaczkiDAO {
         }
 
     }
+// test
+public String searchUsersID() throws SQLException, ClassNotFoundException {
+
+    String selectStmt = "SELECT * FROM Klienci WHERE username = '" + PaczkiController.username + "';";
+
+    try {
+
+        ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
+
+        int ID = getUsersID(resultSet);
+
+        consoleTextArea.appendText(selectStmt + "\n");
+
+        return String.valueOf(ID);
+
+    } catch (SQLException e) {
+        consoleTextArea.appendText("While searching packages, an error occurred. \n");
+        throw e;
+    }
+}
+
 
     public ObservableList<PaczkiDoOdebrania> searchPackagesToDeliver() throws SQLException, ClassNotFoundException {
 

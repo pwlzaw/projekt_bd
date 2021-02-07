@@ -36,6 +36,7 @@ public class PaczkiController {
 
     public static DBUtil dbUtil;
     public static PaczkiDAO paczkiDAO;
+    public static String username;
 
     private static Scene scene;
     private static Parent loadFXML(String fxml) throws IOException {
@@ -46,7 +47,7 @@ public class PaczkiController {
     @FXML
     void connectClientButtonPressed(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
 
-
+        username=userTextField.getText();
         dbUtil = new DBUtil(userTextField.getText(), passwordTextField.getText(), consoleTextArea);
         paczkiDAO = new PaczkiDAO(dbUtil, consoleTextArea);
 
@@ -69,6 +70,7 @@ public class PaczkiController {
     @FXML
     void connectWorkerButtonPressed(ActionEvent event) throws SQLException, ClassNotFoundException, IOException {
 
+        username=userTextField.getText();
         dbUtil = new DBUtil(userTextField.getText(), passwordTextField.getText(), consoleTextArea);
         paczkiDAO = new PaczkiDAO(dbUtil, consoleTextArea);
 

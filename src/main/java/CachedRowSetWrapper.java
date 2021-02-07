@@ -1,8 +1,3 @@
-//import com.sun.rowset.CachedRowSetImpl;
-import com.sun.rowset.CachedRowSetImpl;
-
-import javax.sql.rowset.*;
-
 import javax.sql.RowSet;
 import javax.sql.RowSetEvent;
 import javax.sql.RowSetListener;
@@ -24,8 +19,6 @@ import java.util.Map;
 
 /**
  * A simple {@link CachedRowSet} wrapper.
- * Uses {@link CachedRowSetImpl} on Java 1.6.
- * Avoids direct {@link CachedRowSetImpl} usage on Java 1.7+
  * (especially on Java 9 which restricts access to <em>com.sun.rowset</em> package).
  *
  * @see CachedRowSet
@@ -45,18 +38,14 @@ public class CachedRowSetWrapper implements CachedRowSet, Serializable {
     /**
      * Create a new instance of a CachedRowSetWrapper.
      * <p>
-     * Using {@link CachedRowSetImpl} on Java 1.6.
-     * <p>
      * Using {@link RowSetProvider} on Java 1.7+.
      */
     public CachedRowSetWrapper() throws SQLException {
         String javaVersion = System.getProperty("java.version");
 
-        if (javaVersion != null && javaVersion.startsWith("1.6.")) {
-            internalRowSet = new CachedRowSetImpl();
-        } else {
-            internalRowSet = RowSetProvider.newFactory().createCachedRowSet();
-        }
+
+        internalRowSet = RowSetProvider.newFactory().createCachedRowSet();
+
     }
 
     @Override
