@@ -7,7 +7,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import tables.Automaty;
 import tables.Paczki;
+import tables.PaczkiDoOdebrania;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -54,18 +56,21 @@ public class ModeratorViewController {
     private TableColumn<Paczki, String> tableStatsDeliveredNumber;
 
     @FXML
-    private TableView<Paczki> tableToBeDelivered;
+    private TableView<PaczkiDoOdebrania> tableToBeDelivered;
 
     @FXML
-    private TableColumn<Paczki, String> tableToBeDeliveredId;
+    private TableColumn<PaczkiDoOdebrania, String> tableToBeDeliveredId;
 
     @FXML
-    private TableColumn<Paczki, String> tableToBeDeliveredAdres;
+    private TableColumn<PaczkiDoOdebrania, String> tableToBeRecivedAdres;
+
+    @FXML
+    private TableColumn<PaczkiDoOdebrania, String> tableToBeDeliveredAdres;
 
 
     private void populateStats(ObservableList<Paczki> paczkiData) {
         tableStats.setItems(paczkiData);}
-    private void populateToBeDelivered(ObservableList<Paczki> paczkiData) {
+    private void populateToBeDelivered(ObservableList<PaczkiDoOdebrania> paczkiData) {
         tableToBeDelivered.setItems(paczkiData);}
 
     @FXML
@@ -130,7 +135,7 @@ public class ModeratorViewController {
         try {
 
             tableToBeDelivered.getItems().clear();
-            ObservableList<Paczki> wineData = PaczkiController.paczkiDAO.searchPackagesToDeliver();
+            ObservableList<PaczkiDoOdebrania> wineData = PaczkiController.paczkiDAO.searchPackagesToDeliver();
             populateToBeDelivered(wineData);
 
 

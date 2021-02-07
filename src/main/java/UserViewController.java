@@ -7,7 +7,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import tables.Paczki;
+import tables.StanPaczek;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserViewController {
@@ -21,34 +23,22 @@ public class UserViewController {
     private Button buttonState;
 
     @FXML
-    private TableView<Paczki> tableState;
+    private TableView<StanPaczek> tableState;
 
     @FXML
-    private TableColumn<Paczki, String> tableStateColumnId;
+    private TableColumn<StanPaczek, String> tableHistoryColumnId;
 
     @FXML
-    private TableColumn<Paczki, String> tableStateColumnState;
+    private TableColumn<StanPaczek, String> tableHistoryColumnState;
 
     @FXML
-    private TableColumn<Paczki, String> tableStateColumnReciver;
+    private TableColumn<StanPaczek, String> tableHistoryColumnReciver;
 
     @FXML
-    private TableColumn<Paczki, String> tableStateColumnAdres;
+    private TableColumn<StanPaczek, String> tableHistoryColumnSender;
 
     @FXML
-    private TableColumn<Paczki, String> tableHistoryColumnId;
-
-    @FXML
-    private TableColumn<Paczki, String> tableHistoryColumnState;
-
-    @FXML
-    private TableColumn<Paczki, String> tableHistoryColumnReciver;
-
-    @FXML
-    private TableColumn<Paczki, String> tableHistoryColumnSendDate;
-
-    @FXML
-    private TableColumn<Paczki, String> tableHistoryColumnReciveDate;
+    private TableColumn<StanPaczek, String> tableHistoryColumnReciveDate;
 
     @FXML
     private Button buttonHistoryCollected;
@@ -92,10 +82,23 @@ public class UserViewController {
     @FXML
     private Button buttonRecivePackage;
 
+    // wczytywanie id aktualnego użytkownika
+    String selectStmt = "select id from klienci where imię_nazwisko = current_user();";
+    ResultSet resultSet;
 
-    String IDKlienta;
+    {
+        try {
+            resultSet = PaczkiController.dbUtil.dbExecuteQuery(selectStmt);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
-    private void populatePackages(ObservableList<Paczki> paczkiData) {
+    String IDKlienta =resultSet.toString();
+
+    private void populatePackages(ObservableList<StanPaczek> paczkiData) {
         tableState.setItems(paczkiData);
     }
 
@@ -104,7 +107,7 @@ public class UserViewController {
         try {
 
             tableState.getItems().clear();
-            ObservableList<Paczki> wineData = PaczkiController.paczkiDAO.klientHistoriaOdebranych(IDKlienta); // do zmiany id
+            ObservableList<StanPaczek> wineData = PaczkiController.paczkiDAO.klientHistoriaOdebranych(IDKlienta); // do testów można zmienić na konkretne ID
             populatePackages(wineData);
 
 
@@ -119,7 +122,7 @@ public class UserViewController {
         try {
 
             tableState.getItems().clear();
-            ObservableList<Paczki> wineData = PaczkiController.paczkiDAO.klientHistoriaNadanych(IDKlienta); // do zmiany id
+            ObservableList<StanPaczek> wineData = PaczkiController.paczkiDAO.klientHistoriaNadanych(IDKlienta); // do testów można zmienić na konkretne ID
             populatePackages(wineData);
 
 
@@ -136,7 +139,7 @@ public class UserViewController {
         try {
 
                 tableState.getItems().clear();
-                ObservableList<Paczki> wineData = PaczkiController.paczkiDAO.stanPaczek(IDKlienta); // do zmiany id
+                ObservableList<StanPaczek> wineData = PaczkiController.paczkiDAO.stanPaczek(IDKlienta); // do testów można zmienić na konkretne ID
                 populatePackages(wineData);
 
 

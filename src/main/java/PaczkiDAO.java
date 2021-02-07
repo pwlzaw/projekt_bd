@@ -1,12 +1,13 @@
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextArea;
+import tables.Automaty;
 import tables.Paczki;
+import tables.PaczkiDoOdebrania;
+import tables.StanPaczek;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class PaczkiDAO {
 
@@ -42,50 +43,86 @@ public class PaczkiDAO {
         return paczkiList;
     }
 
-// niepotrzebne
-    public ObservableList<Paczki> searchPackages(String manuf) throws SQLException, ClassNotFoundException {
+    private ObservableList<StanPaczek> getStatusList(ResultSet rs) throws SQLException {
 
-        String selectStmt = "SELECT * FROM paczki WHERE rozmiar LIKE '%" + manuf + "%';";
+        ObservableList<StanPaczek> paczkiList = FXCollections.observableArrayList();
 
-        try {
+        while (rs.next()) {
 
-            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
-
-            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
-
-            consoleTextArea.appendText(selectStmt + "\n");
-
-            return aPackages;
-
-        } catch (SQLException e) {
-            consoleTextArea.appendText("While searching a racket from '" + manuf + "' name, an error occurred. \n");
-            throw e;
+            StanPaczek r = new StanPaczek();
+            r.setNadawca(rs.getString("imię_nazwisko"));
+            r.setOdbiorca(rs.getString("imię_nazwisko"));
+            r.setId(rs.getInt("id"));
+            r.setStan(rs.getString("stan"));
+            r.setData_nadania(rs.getString("data_nadania"));
+            r.setData_odbioru(rs.getString("data_odbioru"));
+            paczkiList.add(r);
         }
 
+        return paczkiList;
     }
 
+    private ObservableList<PaczkiDoOdebrania> getToBeDeliveredList(ResultSet rs) throws SQLException {
+
+        ObservableList<PaczkiDoOdebrania> paczkiList = FXCollections.observableArrayList();
 
 
-    public ObservableList<Paczki> showAllRackets() throws SQLException, ClassNotFoundException {
+        while (rs.next()) {
 
-        String selectStmt = "SELECT * FROM rackets;";
-
-        try {
-
-            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
-
-            ObservableList<Paczki> paczkiList = getPackagesList(resultSet);
-            consoleTextArea.appendText(selectStmt);
-
-            return paczkiList;
-
-
-        } catch (SQLException e) {
-            consoleTextArea.appendText("While searching rackets, an error occurred. \n");
-            throw e;
+            PaczkiDoOdebrania r = new PaczkiDoOdebrania();
+            r.setId(rs.getInt("id"));
+            r.setAdres_nadania(rs.getString("adres"));
+            r.setAdres_odbioru(rs.getString("adres"));
+            paczkiList.add(r);
         }
 
+        return paczkiList;
     }
+
+//// stare metody
+//    public ObservableList<Paczki> searchPackages(String manuf) throws SQLException, ClassNotFoundException {
+//
+//        String selectStmt = "SELECT * FROM paczki WHERE rozmiar LIKE '%" + manuf + "%';";
+//
+//        try {
+//
+//            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
+//
+//            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
+//
+//            consoleTextArea.appendText(selectStmt + "\n");
+//
+//            return aPackages;
+//
+//        } catch (SQLException e) {
+//            consoleTextArea.appendText("While searching a racket from '" + manuf + "' name, an error occurred. \n");
+//            throw e;
+//        }
+//
+//    }
+//
+//
+//
+//    public ObservableList<Paczki> showAllRackets() throws SQLException, ClassNotFoundException {
+//
+//        String selectStmt = "SELECT * FROM rackets;";
+//
+//        try {
+//
+//            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
+//
+//            ObservableList<Paczki> paczkiList = getPackagesList(resultSet);
+//            consoleTextArea.appendText(selectStmt);
+//
+//            return paczkiList;
+//
+//
+//        } catch (SQLException e) {
+//            consoleTextArea.appendText("While searching rackets, an error occurred. \n");
+//            throw e;
+//        }
+//
+//    }
     // początek metod docelowych
     public void sendPackage(String reciverName,String reciverPhone, String reciverEmail,String senderName, String senderPhone, String senderEmail, String reciverMachineID, String senderMachineID,String size) throws SQLException, ClassNotFoundException {
 
@@ -122,7 +159,7 @@ public class PaczkiDAO {
 
     }
 
-    public ObservableList<Paczki> searchPackagesToDeliver() throws SQLException, ClassNotFoundException {
+    public ObservableList<PaczkiDoOdebrania> searchPackagesToDeliver() throws SQLException, ClassNotFoundException {
 
         String selectStmt = "call PaczkiDoOdebrania();";
 
@@ -131,7 +168,7 @@ public class PaczkiDAO {
 
             ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
 
-            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
+            ObservableList<PaczkiDoOdebrania> aPackages = getToBeDeliveredList(resultSet);
 
             consoleTextArea.appendText(selectStmt + "\n");
 
@@ -144,17 +181,16 @@ public class PaczkiDAO {
 
     }
 
-    public ObservableList<Paczki> klientHistoriaOdebranych(String id) throws SQLException, ClassNotFoundException {
+    public ObservableList<StanPaczek> klientHistoriaOdebranych(String id) throws SQLException, ClassNotFoundException {
 
-        String selectStmt = "call klientHistoriaOdebranych(";
-        selectStmt+=id;
-        selectStmt+=");";
+        String selectStmt = "call klientHistoriaOdebranych(" + id + ");";
+
 
         try {
 
             ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
 
-            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
+            ObservableList<StanPaczek> aPackages = getStatusList(resultSet);
 
             consoleTextArea.appendText(selectStmt + "\n");
 
@@ -167,17 +203,15 @@ public class PaczkiDAO {
 
     }
 
-    public ObservableList<Paczki> klientHistoriaNadanych(String id) throws SQLException, ClassNotFoundException {
+    public ObservableList<StanPaczek> klientHistoriaNadanych(String id) throws SQLException, ClassNotFoundException {
 
-        String selectStmt = "call klientHistoriaNadanych(";
-        selectStmt+=id;
-        selectStmt+=");";
+        String selectStmt = "call klientHistoriaNadanych(" + id + ");";
 
         try {
 
             ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
 
-            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
+            ObservableList<StanPaczek> aPackages = getStatusList(resultSet);
 
             consoleTextArea.appendText(selectStmt + "\n");
 
@@ -190,17 +224,15 @@ public class PaczkiDAO {
 
     }
 
-    public ObservableList<Paczki> stanPaczek(String id_klienta) throws SQLException, ClassNotFoundException {
+    public ObservableList<StanPaczek> stanPaczek(String id_klienta) throws SQLException, ClassNotFoundException {
 
-        String selectStmt = "call stanPaczeK(";
-        selectStmt+=id_klienta;
-        selectStmt+=");";
+        String selectStmt = "call stanPaczeK(" + id_klienta + ");";
 
         try {
 
             ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
 
-            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
+            ObservableList<StanPaczek> aPackages = getStatusList(resultSet);
 
             consoleTextArea.appendText(selectStmt + "\n");
 
@@ -263,9 +295,9 @@ public class PaczkiDAO {
 
     public void dostarczPaczke(String id) throws SQLException, ClassNotFoundException {
 
-        String insertStmt = "call dostarcz_przesylke('";
+        String insertStmt = "call dostarcz_przesylke(";
         insertStmt+=id;
-        insertStmt+="');";
+        insertStmt+=");";
 
         try {
 
@@ -281,9 +313,9 @@ public class PaczkiDAO {
 
     public void odbierzPaczke(String id) throws SQLException, ClassNotFoundException {
 
-        String insertStmt = "call odbierz_przesylke('";
+        String insertStmt = "call odbierz_przesylke(";
         insertStmt+=id;
-        insertStmt+="');";
+        insertStmt+=");";
 
         try {
 
@@ -299,9 +331,9 @@ public class PaczkiDAO {
 
     public void odbierzPaczkeKlient(String id) throws SQLException, ClassNotFoundException {
 
-        String insertStmt = "call klient_odbierz_przesylke('";
+        String insertStmt = "call klient_odbierz_przesylke(";
         insertStmt+=id;
-        insertStmt+="');";
+        insertStmt+=");";
 
         try {
 
