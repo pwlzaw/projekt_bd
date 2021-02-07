@@ -120,7 +120,7 @@ public class ModeratorViewController {
         try {
 
             tableStats.getItems().clear();
-            ObservableList<Paczki> wineData = PaczkiController.paczkiDAO.statystykiAutomatu(textAutomatId.getText(),datePicker.toString());
+            ObservableList<Paczki> wineData = PaczkiController.paczkiDAO.statystykiAutomatu(textAutomatId.getText(),datePicker.getPromptText());
             populateStats(wineData);
 
 

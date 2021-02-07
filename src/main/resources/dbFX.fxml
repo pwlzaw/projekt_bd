@@ -19,7 +19,7 @@
                         <TextField fx:id="userTextField" promptText="Podaj nazwę" />
                         <Label text="Hasło:" />
                         <PasswordField fx:id="passwordTextField" prefWidth="207.0" promptText="Podaj hasło" />
-                        <Button fx:id="connectClientButton" mnemonicParsing="false" onAction="#connectClientButtonPressed" text="Zaolguj jako klient" />
+                        <Button fx:id="connectClientButton" mnemonicParsing="false" onAction="#connectClientButtonPressed" text="Zaloguj jako klient" />
                   <Button fx:id="connectWorkerButton" mnemonicParsing="false" onAction="#connectWorkerButtonPressed" text="Zaloguj jako pracownik" />
                         <TextArea fx:id="consoleTextArea" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
                     </children>

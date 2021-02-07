@@ -50,10 +50,10 @@ public class PaczkiDAO {
         while (rs.next()) {
 
             StanPaczek r = new StanPaczek();
-            r.setNadawca(rs.getString("imię_nazwisko"));
-            r.setOdbiorca(rs.getString("imię_nazwisko"));
             r.setId(rs.getInt("id"));
             r.setStan(rs.getString("stan"));
+            r.setOdbiorca(rs.getString("imię_nazwisko"));
+            r.setNadawca(rs.getString("imię_nazwisko"));
             r.setData_nadania(rs.getString("data_nadania"));
             r.setData_odbioru(rs.getString("data_odbioru"));
             paczkiList.add(r);

@@ -82,8 +82,8 @@ public class UserViewController {
     @FXML
     private Button buttonRecivePackage;
 
-    // wczytywanie id aktualnego użytkownika
-    String selectStmt = "select id from klienci where imię_nazwisko = current_user();";
+    // wczytywanie id aktualnego użytkownika - nie działa
+    String selectStmt = "select id from klienci where CONCAT(username,'@localhost') = current_user();";
     ResultSet resultSet;
 
     {
@@ -97,6 +97,7 @@ public class UserViewController {
     }
 
     String IDKlienta =resultSet.toString();
+
 
     private void populatePackages(ObservableList<StanPaczek> paczkiData) {
         tableState.setItems(paczkiData);
@@ -158,7 +159,7 @@ public class UserViewController {
             && !txtSenderNumber.getText().equals(null)) {
 
                 PaczkiController.paczkiDAO.sendPackage(txtReciverName.getText(),txtReciverNuber.getText(),txtReciverMail.getText(),txtSenderName.getText(),txtSenderNumber.getText(),txtSenderMail.getText(),txtReciverMachineID.getText(),txtSenderMachineID.getText(),txtSize.getText());
-                textOutput.setText("Package sent.\n");
+
             }
         } catch (SQLException e) {
             textOutput.setText("Error occurred while getting wines from DB.\n");

@@ -6,18 +6,18 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class StanPaczek {
-    private StringProperty nadawca;
-    private StringProperty odbiorca;
     private IntegerProperty id;
     private StringProperty stan;
+    private StringProperty odbiorca;
+    private StringProperty nadawca;
     private StringProperty data_nadania;
     private StringProperty data_odbioru;
 
     public StanPaczek() {
-        nadawca= new SimpleStringProperty();
-        odbiorca= new SimpleStringProperty();
         id = new SimpleIntegerProperty();
         stan= new SimpleStringProperty();
+        odbiorca= new SimpleStringProperty();
+        nadawca= new SimpleStringProperty();
         data_nadania= new SimpleStringProperty();
         data_odbioru= new SimpleStringProperty();
     }
