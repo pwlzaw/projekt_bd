@@ -24,31 +24,31 @@ public class UserViewController {
     private TableView<Paczki> tableState;
 
     @FXML
-    private TableColumn<?, ?> tableStateColumnId;
+    private TableColumn<Paczki, String> tableStateColumnId;
 
     @FXML
-    private TableColumn<?, ?> tableStateColumnState;
+    private TableColumn<Paczki, String> tableStateColumnState;
 
     @FXML
-    private TableColumn<?, ?> tableStateColumnReciver;
+    private TableColumn<Paczki, String> tableStateColumnReciver;
 
     @FXML
-    private TableColumn<?, ?> tableStateColumnAdres;
+    private TableColumn<Paczki, String> tableStateColumnAdres;
 
     @FXML
-    private TableColumn<?, ?> tableHistoryColumnId;
+    private TableColumn<Paczki, String> tableHistoryColumnId;
 
     @FXML
-    private TableColumn<?, ?> tableHistoryColumnState;
+    private TableColumn<Paczki, String> tableHistoryColumnState;
 
     @FXML
-    private TableColumn<?, ?> tableHistoryColumnReciver;
+    private TableColumn<Paczki, String> tableHistoryColumnReciver;
 
     @FXML
-    private TableColumn<?, ?> tableHistoryColumnSendDate;
+    private TableColumn<Paczki, String> tableHistoryColumnSendDate;
 
     @FXML
-    private TableColumn<?, ?> tableHistoryColumnReciveDate;
+    private TableColumn<Paczki, String> tableHistoryColumnReciveDate;
 
     @FXML
     private Button buttonHistoryCollected;
@@ -93,8 +93,6 @@ public class UserViewController {
     private Button buttonRecivePackage;
 
 
-    private DBUtil dbUtil;
-    private PaczkiDAO paczkiDAO;
     String IDKlienta;
 
     private void populatePackages(ObservableList<Paczki> paczkiData) {
@@ -106,7 +104,7 @@ public class UserViewController {
         try {
 
             tableState.getItems().clear();
-            ObservableList<Paczki> wineData = paczkiDAO.klientHistoriaOdebranych(IDKlienta); // do zmiany id
+            ObservableList<Paczki> wineData = PaczkiController.paczkiDAO.klientHistoriaOdebranych(IDKlienta); // do zmiany id
             populatePackages(wineData);
 
 
@@ -121,7 +119,7 @@ public class UserViewController {
         try {
 
             tableState.getItems().clear();
-            ObservableList<Paczki> wineData = paczkiDAO.klientHistoriaNadanych(IDKlienta); // do zmiany id
+            ObservableList<Paczki> wineData = PaczkiController.paczkiDAO.klientHistoriaNadanych(IDKlienta); // do zmiany id
             populatePackages(wineData);
 
 
@@ -138,7 +136,7 @@ public class UserViewController {
         try {
 
                 tableState.getItems().clear();
-                ObservableList<Paczki> wineData = paczkiDAO.stanPaczek(IDKlienta); // do zmiany id
+                ObservableList<Paczki> wineData = PaczkiController.paczkiDAO.stanPaczek(IDKlienta); // do zmiany id
                 populatePackages(wineData);
 
 
@@ -156,7 +154,7 @@ public class UserViewController {
             && !txtSenderName.getText().equals(null) && !txtReciverNuber.getText().equals(null) && !txtReciverMail.getText().equals(null) && !txtSenderMail.getText().equals(null)
             && !txtSenderNumber.getText().equals(null)) {
 
-                paczkiDAO.sendPackage(txtReciverName.getText(),txtReciverNuber.getText(),txtReciverMail.getText(),txtSenderName.getText(),txtSenderNumber.getText(),txtSenderMail.getText(),txtReciverMachineID.getText(),txtSenderMachineID.getText(),txtSize.getText());
+                PaczkiController.paczkiDAO.sendPackage(txtReciverName.getText(),txtReciverNuber.getText(),txtReciverMail.getText(),txtSenderName.getText(),txtSenderNumber.getText(),txtSenderMail.getText(),txtReciverMachineID.getText(),txtSenderMachineID.getText(),txtSize.getText());
                 textOutput.setText("Package sent.\n");
             }
         } catch (SQLException e) {
@@ -169,7 +167,7 @@ public class UserViewController {
     void buttonRecivePackageOnClick(ActionEvent event) throws SQLException, ClassNotFoundException{
         try {
 
-            paczkiDAO.odbierzPaczkeKlient(txtRecivePackage.getText());
+            PaczkiController.paczkiDAO.odbierzPaczkeKlient(txtRecivePackage.getText());
             textOutput.setText("Package received.\n");
 
 

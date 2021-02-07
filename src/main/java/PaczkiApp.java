@@ -12,9 +12,10 @@ public class PaczkiApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
         scene = new Scene(loadFXML("dbFX"), 800, 600);
         stage.setScene(scene);
-        stage.setTitle("tables.Packages App");
+        stage.setTitle("Packages App");
         stage.show();
     }
 

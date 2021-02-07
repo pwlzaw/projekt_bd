@@ -45,36 +45,36 @@ public class ModeratorViewController {
     private TableView<Paczki> tableStats;
 
     @FXML
-    private TableColumn<?, ?> tableStatsId;
+    private TableColumn<Paczki, String> tableStatsId;
 
     @FXML
-    private TableColumn<?, ?> tableStatsAdres;
+    private TableColumn<Paczki, String> tableStatsAdres;
 
     @FXML
-    private TableColumn<?, ?> tableStatsDeliveredNumber;
+    private TableColumn<Paczki, String> tableStatsDeliveredNumber;
 
     @FXML
-    private TableView<?> tableToBeDelivered;
+    private TableView<Paczki> tableToBeDelivered;
 
     @FXML
-    private TableColumn<?, ?> tableToBeDeliveredId;
+    private TableColumn<Paczki, String> tableToBeDeliveredId;
 
     @FXML
-    private TableColumn<?, ?> tableToBeDeliveredAdres;
+    private TableColumn<Paczki, String> tableToBeDeliveredAdres;
 
-    private DBUtil dbUtil;
-    private PaczkiDAO paczkiDAO;
 
-    private void populatePackages(ObservableList<Paczki> paczkiData) {
+    private void populateStats(ObservableList<Paczki> paczkiData) {
         tableStats.setItems(paczkiData);}
+    private void populateToBeDelivered(ObservableList<Paczki> paczkiData) {
+        tableToBeDelivered.setItems(paczkiData);}
 
     @FXML
     void buttonDayEarningsOnClick(ActionEvent event) throws SQLException, ClassNotFoundException{
         try {
 
             tableStats.getItems().clear();
-            ObservableList<Paczki> wineData = paczkiDAO.statystykiDnia(datePicker.toString());
-            populatePackages(wineData);
+            ObservableList<Paczki> wineData = PaczkiController.paczkiDAO.statystykiDnia(datePicker.toString());
+            populateStats(wineData);
 
 
         } catch (SQLException e) {
@@ -87,7 +87,7 @@ public class ModeratorViewController {
     void buttonDeliverOnClick(ActionEvent event) throws SQLException, ClassNotFoundException{
         try {
 
-            paczkiDAO.dostarczPaczke(textPackageId.getText());
+            PaczkiController.paczkiDAO.dostarczPaczke(textPackageId.getText());
             textOutput.setText("Package delivered.\n");
 
 
@@ -101,7 +101,7 @@ public class ModeratorViewController {
     void buttonReciveOnClick(ActionEvent event) throws SQLException, ClassNotFoundException{
         try {
 
-             paczkiDAO.odbierzPaczke(textPackageId.getText());
+            PaczkiController.paczkiDAO.odbierzPaczke(textPackageId.getText());
              textOutput.setText("Package received.\n");
 
         } catch (SQLException e) {
@@ -115,8 +115,8 @@ public class ModeratorViewController {
         try {
 
             tableStats.getItems().clear();
-            ObservableList<Paczki> wineData = paczkiDAO.statystykiAutomatu(textAutomatId.getText(),datePicker.toString());
-            populatePackages(wineData);
+            ObservableList<Paczki> wineData = PaczkiController.paczkiDAO.statystykiAutomatu(textAutomatId.getText(),datePicker.toString());
+            populateStats(wineData);
 
 
         } catch (SQLException e) {
@@ -129,9 +129,9 @@ public class ModeratorViewController {
     void buttonToBeDeliveredOnClick(ActionEvent event) throws SQLException, ClassNotFoundException{
         try {
 
-            tableStats.getItems().clear();
-            ObservableList<Paczki> wineData = paczkiDAO.searchPackagesToDeliver();
-            populatePackages(wineData);
+            tableToBeDelivered.getItems().clear();
+            ObservableList<Paczki> wineData = PaczkiController.paczkiDAO.searchPackagesToDeliver();
+            populateToBeDelivered(wineData);
 
 
         } catch (SQLException e) {
