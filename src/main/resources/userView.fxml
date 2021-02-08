@@ -20,7 +20,7 @@
                   <TableColumn fx:id="tableHistoryColumnState" prefWidth="60.0" text="Stan" />
                   <TableColumn fx:id="tableHistoryColumnReciver" prefWidth="70.0" text="Odbiorca" />
                   <TableColumn fx:id="tableHistoryColumnSender" prefWidth="70.0" text="Nadawca" />
-                  <TableColumn fx:id="tableHistoryColumnReciveDate" prefWidth="85.0" text="Data Nadania" />
+                  <TableColumn fx:id="tableHistoryColumnSendDate" prefWidth="85.0" text="Data Nadania" />
                   <TableColumn fx:id="tableHistoryColumnReciveDate" prefWidth="85.0" text="Data Odbioru" />
                </columns>
             </TableView>
