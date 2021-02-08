@@ -105,7 +105,7 @@ public class PaczkiDAO {
 
         return paczkiList;
     }
-// test
+
     private int getUsersID(ResultSet rs) throws SQLException {
 
         int id=0;
@@ -118,50 +118,7 @@ public class PaczkiDAO {
         return id;
     }
 
-//// stare metody
-//    public ObservableList<Paczki> searchPackages(String manuf) throws SQLException, ClassNotFoundException {
-//
-//        String selectStmt = "SELECT * FROM paczki WHERE rozmiar LIKE '%" + manuf + "%';";
-//
-//        try {
-//
-//            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
-//
-//            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
-//
-//            consoleTextArea.appendText(selectStmt + "\n");
-//
-//            return aPackages;
-//
-//        } catch (SQLException e) {
-//            consoleTextArea.appendText("While searching a racket from '" + manuf + "' name, an error occurred. \n");
-//            throw e;
-//        }
-//
-//    }
-//
-//
-//
-//    public ObservableList<Paczki> showAllRackets() throws SQLException, ClassNotFoundException {
-//
-//        String selectStmt = "SELECT * FROM rackets;";
-//
-//        try {
-//
-//            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
-//
-//            ObservableList<Paczki> paczkiList = getPackagesList(resultSet);
-//            consoleTextArea.appendText(selectStmt);
-//
-//            return paczkiList;
-//
-//
-//        } catch (SQLException e) {
-//            consoleTextArea.appendText("While searching rackets, an error occurred. \n");
-//            throw e;
-//        }
-//
-//    }
+
     // początek metod docelowych
     public void sendPackage(String reciverName,String reciverPhone, String reciverEmail,String senderName, String senderPhone, String senderEmail, String reciverMachineID, String senderMachineID,String size, String username) throws SQLException, ClassNotFoundException {
 
@@ -199,7 +156,7 @@ public class PaczkiDAO {
         }
 
     }
-// test
+
 public String searchUsersID() throws SQLException, ClassNotFoundException {
 
     String selectStmt = "SELECT * FROM Klienci WHERE username = '" + PaczkiController.username + "';";
