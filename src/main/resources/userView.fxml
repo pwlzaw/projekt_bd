@@ -2,29 +2,54 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <SplitPane dividerPositions="0.16335227272727273" nodeOrientation="LEFT_TO_RIGHT" prefHeight="427.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserViewController">
    <items>
       <AnchorPane prefHeight="425.0" prefWidth="600.0">
          <children>
-            <Button fx:id="buttonHistorySent" layoutX="166.0" layoutY="26.0" mnemonicParsing="false" onAction="#buttonHistorySentOnClick" text="Historia Nadanych" />
+            <Button fx:id="buttonHistorySent" layoutX="166.0" layoutY="26.0" mnemonicParsing="false" onAction="#buttonHistorySentOnClick" text="Historia Odebranych" />
             <Button fx:id="buttonState" layoutX="323.0" layoutY="26.0" mnemonicParsing="false" onAction="#buttonStateOnClick" text="Stan Paczek" />
             <TableView fx:id="tableState" layoutY="98.0" prefHeight="284.0" prefWidth="445.0">
                <columns>
-                  <TableColumn fx:id="tableHistoryColumnId" prefWidth="70.0" text="ID paczki" />
-                  <TableColumn fx:id="tableHistoryColumnState" prefWidth="60.0" text="Stan" />
-                  <TableColumn fx:id="tableHistoryColumnReciver" prefWidth="70.0" text="Odbiorca" />
-                  <TableColumn fx:id="tableHistoryColumnSender" prefWidth="70.0" text="Nadawca" />
-                  <TableColumn fx:id="tableHistoryColumnSendDate" prefWidth="85.0" text="Data Nadania" />
-                  <TableColumn fx:id="tableHistoryColumnReciveDate" prefWidth="85.0" text="Data Odbioru" />
+                  <TableColumn fx:id="tableHistoryColumnId" prefWidth="75.0" text="ID paczki">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="id" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="tableHistoryColumnState" prefWidth="75.0" text="Stan">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="stan" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="tableHistoryColumnReciver" prefWidth="75.0" text="Odbiorca">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="odbiorca" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="tableHistoryColumnSender" prefWidth="75.0" text="Nadawca">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="nadawca" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="tableHistoryColumnReciveDate" prefWidth="75.0" text="Data Nadania">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="data_nadania" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="tableHistoryColumnSendDate" prefWidth="75.0" text="Data Odbioru">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="data_odbioru" />
+                     </cellValueFactory>
+                  </TableColumn>
                </columns>
             </TableView>
-            <Button fx:id="buttonHistoryCollected" layoutX="22.0" layoutY="26.0" mnemonicParsing="false" onAction="#buttonHistoryCollectedOnClick" text="Historia Odebranych" />
+            <Button fx:id="buttonHistoryCollected" layoutX="22.0" layoutY="26.0" mnemonicParsing="false" onAction="#buttonHistoryCollectedOnClick" text="Historia Nadanych" />
             <Text fx:id="textOutput" layoutX="22.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" />
          </children>
       </AnchorPane>
@@ -56,3 +81,4 @@
       </AnchorPane>
    </items>
 </SplitPane>
+
