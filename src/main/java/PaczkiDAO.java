@@ -391,7 +391,9 @@ public String searchUsersID() throws SQLException, ClassNotFoundException {
 
         String insertStmt = "call klient_odbierz_przesylke(";
         insertStmt+=id;
-        insertStmt+=");";
+        insertStmt+=",'";
+        insertStmt+=PaczkiController.username;
+        insertStmt+="');";
 
         try {
 
@@ -402,6 +404,5 @@ public String searchUsersID() throws SQLException, ClassNotFoundException {
             consoleTextArea.appendText("While searching packages, an error occurred. \n");
             throw e;
         }
-
     }
 }
