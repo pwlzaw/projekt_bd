@@ -97,8 +97,8 @@ public class PaczkiDAO {
 
             PaczkiDoOdebrania r = new PaczkiDoOdebrania();
             r.setId(rs.getInt("id"));
-            r.setAdres_nadania(rs.getString("adres"));
-            r.setAdres_odbioru(rs.getString("adres"));
+            r.setAdres_nadania(rs.getString(2));
+            r.setAdres_odbioru(rs.getString(3));
             paczkiList.add(r);
         }
 
