@@ -24,10 +24,10 @@
       <Text fx:id="textOutput" layoutX="14.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <TableView fx:id="tableStats" layoutX="14.0" layoutY="135.0" prefHeight="200.0" prefWidth="401.0">
         <columns>
-          <TableColumn fx:id="tableStatsId" prefWidth="85.0" text="ID automatu" />
-          <TableColumn fx:id="tableStatsAdres" prefWidth="65.0" text="Adres" />
-            <TableColumn fx:id="tableStatsDeliveredNumber" prefWidth="119.0" text="Licznba Nadanych" />
-            <TableColumn prefWidth="131.0" text="Liczba Odebranych" />
+          <TableColumn fx:id="tableCountS" prefWidth="85.0" text="liczba s" />
+          <TableColumn fx:id="tableCountM" prefWidth="65.0" text="liczba m" />
+            <TableColumn fx:id="tableCountL" prefWidth="119.0" text="liczba l" />
+            <TableColumn fx:id="tableCountXL" prefWidth="131.0" text="liczba xl" />
         </columns>
       </TableView>
       <TableView fx:id="tableToBeDelivered" layoutX="14.0" layoutY="122.0" prefHeight="200.0" prefWidth="401.0">

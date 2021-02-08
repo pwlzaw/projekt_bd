@@ -1,10 +1,7 @@
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextArea;
-import tables.Automaty;
-import tables.Paczki;
-import tables.PaczkiDoOdebrania;
-import tables.StanPaczek;
+import tables.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,6 +57,35 @@ public class PaczkiDAO {
         }
 
         return paczkiList;
+    }
+
+    private ObservableList<GetStats> getStatsList(ResultSet rs) throws SQLException {
+
+        ObservableList<GetStats> paczkiList = FXCollections.observableArrayList();
+
+        while (rs.next()) {
+
+            GetStats r = new GetStats();
+            r.setLiczbaS(rs.getInt("liczba_s"));
+            r.setLiczbaM(rs.getInt("liczba_m"));
+            r.setLiczbaL(rs.getInt("liczba_l"));
+            r.setLiczbaXL(rs.getInt("liczba_xl"));
+        }
+
+        return paczkiList;
+    }
+
+    private double getEarningsList(ResultSet rs) throws SQLException {
+
+       double zysk=0;
+
+        while (rs.next()) {
+
+                zysk=(rs.getDouble("sum(c.cena)"));
+
+        }
+
+        return zysk;
     }
 
     private ObservableList<PaczkiDoOdebrania> getToBeDeliveredList(ResultSet rs) throws SQLException {
@@ -193,6 +219,28 @@ public String searchUsersID() throws SQLException, ClassNotFoundException {
     }
 }
 
+    public String searchEarnings(String data) throws SQLException, ClassNotFoundException {
+
+        String selectStmt = "call PodgladZysku('" + data + "');";
+
+
+        try {
+
+            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
+
+            double zysk = getEarningsList(resultSet);
+
+            consoleTextArea.appendText(selectStmt + "\n");
+
+            return String.valueOf(zysk);
+
+        } catch (SQLException e) {
+            consoleTextArea.appendText("While searching packages, an error occurred. \n");
+            throw e;
+        }
+
+    }
+
 
     public ObservableList<PaczkiDoOdebrania> searchPackagesToDeliver() throws SQLException, ClassNotFoundException {
 
@@ -280,19 +328,15 @@ public String searchUsersID() throws SQLException, ClassNotFoundException {
 
     }
 
-    public ObservableList<Paczki> statystykiAutomatu(String id_automatu, String dzien) throws SQLException, ClassNotFoundException {
+    public ObservableList<GetStats> statystykiAutomatu(String id_automatu, String dzien) throws SQLException, ClassNotFoundException {
 
-        String selectStmt = "call statystykiAutomatu(";
-        selectStmt+=id_automatu;
-        selectStmt+=",'";
-        selectStmt+=dzien;
-        selectStmt+="');";
+        String selectStmt = "call statystykiAutomatu(" + id_automatu + ",'" + dzien + "');";
 
         try {
 
             ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
 
-            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
+            ObservableList<GetStats> aPackages = getStatsList(resultSet);
 
             consoleTextArea.appendText(selectStmt + "\n");
 
@@ -305,28 +349,6 @@ public String searchUsersID() throws SQLException, ClassNotFoundException {
 
     }
 
-    public ObservableList<Paczki> statystykiDnia(String dzien) throws SQLException, ClassNotFoundException {
-
-        String selectStmt = "call PodgladZysku('";
-        selectStmt+=dzien;
-        selectStmt+="');";
-
-        try {
-
-            ResultSet resultSet = dbUtil.dbExecuteQuery(selectStmt);
-
-            ObservableList<Paczki> aPackages = getPackagesList(resultSet);
-
-            consoleTextArea.appendText(selectStmt + "\n");
-
-            return aPackages;
-
-        } catch (SQLException e) {
-            consoleTextArea.appendText("While searching packages, an error occurred. \n");
-            throw e;
-        }
-
-    }
 
     public void dostarczPaczke(String id) throws SQLException, ClassNotFoundException {
 

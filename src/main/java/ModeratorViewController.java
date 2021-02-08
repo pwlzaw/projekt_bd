@@ -7,9 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import tables.Automaty;
-import tables.Paczki;
-import tables.PaczkiDoOdebrania;
+import tables.*;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -44,16 +42,19 @@ public class ModeratorViewController {
     private Text textOutput;
 
     @FXML
-    private TableView<Paczki> tableStats;
+    private TableView<GetStats> tableStats;
 
     @FXML
-    private TableColumn<Paczki, String> tableStatsId;
+    private TableColumn<GetStats, String> tableCountS;
 
     @FXML
-    private TableColumn<Paczki, String> tableStatsAdres;
+    private TableColumn<GetStats, String> tableCountM;
 
     @FXML
-    private TableColumn<Paczki, String> tableStatsDeliveredNumber;
+    private TableColumn<GetStats, String> tableCountL;
+
+    @FXML
+    private TableColumn<GetStats, String> tableCountXL;
 
     @FXML
     private TableView<PaczkiDoOdebrania> tableToBeDelivered;
@@ -68,7 +69,7 @@ public class ModeratorViewController {
     private TableColumn<PaczkiDoOdebrania, String> tableToBeDeliveredAdres;
 
 
-    private void populateStats(ObservableList<Paczki> paczkiData) {
+    private void populateStats(ObservableList<GetStats> paczkiData) {
         tableStats.setItems(paczkiData);}
     private void populateToBeDelivered(ObservableList<PaczkiDoOdebrania> paczkiData) {
         tableToBeDelivered.setItems(paczkiData);}
@@ -77,9 +78,8 @@ public class ModeratorViewController {
     void buttonDayEarningsOnClick(ActionEvent event) throws SQLException, ClassNotFoundException{
         try {
 
-            tableStats.getItems().clear();
-            ObservableList<Paczki> wineData = PaczkiController.paczkiDAO.statystykiDnia(datePicker.toString());
-            populateStats(wineData);
+            String zysk = PaczkiController.paczkiDAO.searchEarnings(datePicker.getValue().toString());
+            textOutput.setText(zysk + " - Zysk w danym dniu.\n");
 
 
         } catch (SQLException e) {
@@ -119,8 +119,10 @@ public class ModeratorViewController {
     void buttonStatsOnClick(ActionEvent event) throws SQLException, ClassNotFoundException{
         try {
 
+            tableToBeDelivered.setVisible(false);
+            tableStats.setVisible(true);
             tableStats.getItems().clear();
-            ObservableList<Paczki> wineData = PaczkiController.paczkiDAO.statystykiAutomatu(textAutomatId.getText(),datePicker.getPromptText());
+            ObservableList<GetStats> wineData = PaczkiController.paczkiDAO.statystykiAutomatu(textAutomatId.getText(),datePicker.getValue().toString());
             populateStats(wineData);
 
 
@@ -133,7 +135,8 @@ public class ModeratorViewController {
     @FXML
     void buttonToBeDeliveredOnClick(ActionEvent event) throws SQLException, ClassNotFoundException{
         try {
-
+            tableStats.setVisible(false);
+            tableToBeDelivered.setVisible(true);
             tableToBeDelivered.getItems().clear();
             ObservableList<PaczkiDoOdebrania> wineData = PaczkiController.paczkiDAO.searchPackagesToDeliver();
             populateToBeDelivered(wineData);
