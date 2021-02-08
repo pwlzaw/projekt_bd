@@ -49,8 +49,8 @@ public class PaczkiDAO {
             StanPaczek r = new StanPaczek();
             r.setId(rs.getInt("id"));
             r.setStan(rs.getString("stan"));
-            r.setOdbiorca(rs.getString("imię_nazwisko"));
-            r.setNadawca(rs.getString("imię_nazwisko"));
+            r.setOdbiorca(rs.getString(2));
+            r.setNadawca(rs.getString(1));
             r.setData_nadania(rs.getString("data_nadania"));
             r.setData_odbioru(rs.getString("data_odbioru"));
             paczkiList.add(r);

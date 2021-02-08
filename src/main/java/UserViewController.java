@@ -170,7 +170,6 @@ public class UserViewController {
         try {
 
             PaczkiController.paczkiDAO.odbierzPaczkeKlient(txtRecivePackage.getText());
-            textOutput.setText("Package received.\n");
 
 
         } catch (SQLException e) {
