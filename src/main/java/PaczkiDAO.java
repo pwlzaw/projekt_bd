@@ -66,10 +66,10 @@ public class PaczkiDAO {
         while (rs.next()) {
 
             GetStats r = new GetStats();
-            r.setLiczbaS(rs.getInt("liczba_s"));
-            r.setLiczbaM(rs.getInt("liczba_m"));
-            r.setLiczbaL(rs.getInt("liczba_l"));
-            r.setLiczbaXL(rs.getInt("liczba_xl"));
+            r.setLiczbaS(rs.getInt(1));
+            r.setLiczbaM(rs.getInt(2));
+            r.setLiczbaL(rs.getInt(3));
+            r.setLiczbaXL(rs.getInt(4));
         }
 
         return paczkiList;
