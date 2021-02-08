@@ -70,6 +70,7 @@ public class PaczkiDAO {
             r.setLiczbaM(rs.getInt(2));
             r.setLiczbaL(rs.getInt(3));
             r.setLiczbaXL(rs.getInt(4));
+            paczkiList.add(r);
         }
 
         return paczkiList;
