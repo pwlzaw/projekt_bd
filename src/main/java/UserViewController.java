@@ -106,7 +106,7 @@ public class UserViewController {
         try {
 
             tableState.getItems().clear();
-            ObservableList<StanPaczek> wineData = PaczkiController.paczkiDAO.klientHistoriaOdebranych(IDKlienta); // do testów można zmienić na konkretne ID
+            ObservableList<StanPaczek> wineData = PaczkiController.paczkiDAO.klientHistoriaOdebranych(IDKlienta);
             populatePackages(wineData);
 
 
@@ -121,7 +121,7 @@ public class UserViewController {
         try {
 
             tableState.getItems().clear();
-            ObservableList<StanPaczek> wineData = PaczkiController.paczkiDAO.klientHistoriaNadanych(IDKlienta); // do testów można zmienić na konkretne ID
+            ObservableList<StanPaczek> wineData = PaczkiController.paczkiDAO.klientHistoriaNadanych(IDKlienta);
             populatePackages(wineData);
 
 
@@ -138,7 +138,7 @@ public class UserViewController {
         try {
 
                 tableState.getItems().clear();
-                ObservableList<StanPaczek> wineData = PaczkiController.paczkiDAO.stanPaczek(IDKlienta); // do testów można zmienić na konkretne ID
+                ObservableList<StanPaczek> wineData = PaczkiController.paczkiDAO.stanPaczek(IDKlienta);
                 populatePackages(wineData);
 
 
@@ -156,7 +156,7 @@ public class UserViewController {
             && !txtSenderName.getText().equals(null) && !txtReciverNuber.getText().equals(null) && !txtReciverMail.getText().equals(null) && !txtSenderMail.getText().equals(null)
             && !txtSenderNumber.getText().equals(null)) {
 
-                PaczkiController.paczkiDAO.sendPackage(txtReciverName.getText(),txtReciverNuber.getText(),txtReciverMail.getText(),txtSenderName.getText(),txtSenderNumber.getText(),txtSenderMail.getText(),txtReciverMachineID.getText(),txtSenderMachineID.getText(),txtSize.getText());
+                PaczkiController.paczkiDAO.sendPackage(txtReciverName.getText(),txtReciverNuber.getText(),txtReciverMail.getText(),txtSenderName.getText(),txtSenderNumber.getText(),txtSenderMail.getText(),txtReciverMachineID.getText(),txtSenderMachineID.getText(),txtSize.getText(),PaczkiController.username);
 
             }
         } catch (SQLException e) {

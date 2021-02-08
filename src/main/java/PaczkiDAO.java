@@ -136,7 +136,7 @@ public class PaczkiDAO {
 //
 //    }
     // początek metod docelowych
-    public void sendPackage(String reciverName,String reciverPhone, String reciverEmail,String senderName, String senderPhone, String senderEmail, String reciverMachineID, String senderMachineID,String size) throws SQLException, ClassNotFoundException {
+    public void sendPackage(String reciverName,String reciverPhone, String reciverEmail,String senderName, String senderPhone, String senderEmail, String reciverMachineID, String senderMachineID,String size, String username) throws SQLException, ClassNotFoundException {
 
         StringBuilder sb = new StringBuilder("call nadaj_przesylke('");
         sb.append(reciverName);
@@ -156,7 +156,9 @@ public class PaczkiDAO {
         sb.append(senderMachineID);
         sb.append(",");
         sb.append(size);
-        sb.append(");");
+        sb.append(",'");
+        sb.append(username);
+        sb.append("');");
         String insertStmt = sb.toString();
 
         try {
